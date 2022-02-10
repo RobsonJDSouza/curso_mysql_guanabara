@@ -6,6 +6,10 @@
 
 -- DML - Data Manipulation Language
     insert into
+    update
+    delete
+    truncate
+
 
 -- Tipos Primitivos
 https://elias.praciano.com/2014/01/mysql-tipos-de-dados/
@@ -72,5 +76,5 @@ Funções
 -- Trigger 
 Alerta no banco de dados. 
 
-
+-- rigistro = Tuplas
 

@@ -69,23 +69,48 @@ describe familia;
 select * from pessoas;
 
 use consulta;
- -- if not exists - caso tiver uma tabela cursos o BD não deixará sobrescrever
- -- not null obriga escrever no campo - Constranger unique/ terá um nome apenas no registro
- -- unsigned - não poderá ter sinais no registro
- -- charset - para não termos problema de acentuaçãoptimize
-create table if not exists cursos( 
-nome varchar(30) not null unique, 
+
+
+create table if not exists cursos(   -- if not exists - caso tiver uma tabela cursos o BD não deixará sobrescrever
+nome varchar(30) not null unique,  -- not null obriga escrever no campo - Constranger unique/ terá um nome apenas no registro
 descricao text,
-carga int unsigned, 
+carga int unsigned,  -- unsigned - não poderá ter sinais no registro
 totalaula int unsigned,
 ano year default '2022'
-) default charset = utf8; 
+) default charset = utf8;  -- charset - para não termos problema de acentuaçãoptimize
 
+-- modificar a posição para primeiro
 alter table cursos
 add column idcurso int first;
 
+-- add a chave primária
 alter table cursos
 add primary key(idcurso);
 
 -- apagar a tabela
 drop table if exists teste;
+
+-- mudar os registros
+update cursos
+set nome = 'Guanabara'
+where idcurso = '1';
+
+-- mudar dois regitro ou mais
+update cursos
+set nome = 'Mysql' , descricao = 'YouTube'
+where idcurso = 1
+limit = 1; -- limitar a alteração para apenas uma linha, tirando o risco de fazer mudança em outra linha
+
+--modificar mais de duas linhas
+update cursos
+
+-- remover linhas da tabela
+delete from cursos
+where idcurso = '8'
+
+-- deletar masi de um linha
+delete from cursos
+where idcurso = 2022 
+
+-- todas linhas de tabela
+truncate table cursos
