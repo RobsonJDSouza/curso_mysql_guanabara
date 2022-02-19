@@ -80,29 +80,31 @@ ano year default '2022'
 ) default charset = utf8;  -- charset - para não termos problema de acentuaçãoptimize
 
 -- modificar a posição para primeiro
-alter table cursos
+alter table cursos -- alter table - comando para manipular colunas
 add column idcurso int first;
 
 -- add a chave primária
-alter table cursos
-add primary key(idcurso);
+alter table (nome da tabela)
+add primary key(nome da colula que será chave primária);
 
 -- apagar a tabela
-drop table if exists teste;
+drop table if exists (nome da tabela);
 
--- mudar os registros
-update cursos
-set nome = 'Guanabara'
+-- mudar os registros - Update --> Comando para moficar a linha da tabela
+update (nome da tabela)
+set nome = 'robson'
 where idcurso = '1';
 
--- mudar dois regitro ou mais
+-- mudar dois regitro ou mais - sempre na mesma lina
 update cursos
 set nome = 'Mysql' , descricao = 'YouTube'
-where idcurso = 1
+where idcurso = '1'
 limit = 1; -- limitar a alteração para apenas uma linha, tirando o risco de fazer mudança em outra linha
 
 --modificar mais de duas linhas
 update cursos
+	set nome = 'robson'
+	where coluna = '1'
 
 -- remover linhas da tabela
 delete from cursos
@@ -110,7 +112,7 @@ where idcurso = '8'
 
 -- deletar masi de um linha
 delete from cursos
-where idcurso = 2022 
+where idcurso = 2022 -- Se na tabela tiver mais de um usuário tiver no campo o ano 2022	
 
 -- todas linhas de tabela
 truncate table cursos
