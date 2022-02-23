@@ -9,6 +9,8 @@
     update
     delete
     truncate
+--DQL - Data query language
+    select
 
 -- Dump
     Backup do Banco de dados

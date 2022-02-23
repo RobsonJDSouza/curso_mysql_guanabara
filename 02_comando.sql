@@ -1,3 +1,6 @@
+-- Acessando o mysql pelo terminal do Linux
+	mysql -h localhost -u root -p
+
 create database consulta -- cria um novo banco de dados
 	default character set utf8 -- padrão de acentuação 
     default collate utf8_general_ci;
@@ -93,26 +96,67 @@ drop table if exists (nome da tabela);
 -- mudar os registros - Update --> Comando para moficar a linha da tabela
 update (nome da tabela)
 set nome = 'robson'
-where idcurso = '1';
+where idcurso = 1;
 
 -- mudar dois regitro ou mais - sempre na mesma lina
 update cursos
 set nome = 'Mysql' , descricao = 'YouTube'
-where idcurso = '1'
+where idcurso = 1
 limit = 1; -- limitar a alteração para apenas uma linha, tirando o risco de fazer mudança em outra linha
 
 --modificar mais de duas linhas
 update cursos
 	set nome = 'robson'
-	where coluna = '1'
+	where coluna = 1
 
 -- remover linhas da tabela
 delete from cursos
 where idcurso = '8'
 
--- deletar masi de um linha
+-- deletar mais de um linha
 delete from cursos
 where idcurso = 2022 -- Se na tabela tiver mais de um usuário tiver no campo o ano 2022	
 
 -- todas linhas de tabela
-truncate table cursos
+truncate table cursos	
+
+						-- COMANDOS USANDO SELECT--
+						
+-- orderna a table pela colula
+select * from cursos
+order by nome;
+
+-- orderna a table pela coluna de baixo para cima
+select * from cursos
+order by nome desc;
+
+-- selecionar coluna
+select idcurso, nome, ano from cursos -- posso colocar os campos invertidos
+order by nome, ano; -- qual coluna devo ordenar a consulta
+
+-- pesquisar o banco por linhas
+select * from cursos
+where idcurso = '1'
+order by nome;
+
+select ano, idcurso from cursos
+where idcurso = '1'
+order by nome;
+
+select ano, idcurso,curso from cursos
+where idcurso > '1'
+order by nome;
+
+-- operadores relacionais - =, <,>,<=,>=,!=,<> 
+
+select idcurso from cursos
+where nome between 7 and 10;
+
+select nome, totalaula from cursos
+where totalaula in (35,36);
+
+select ano, totalaula, nome from cursos
+where ano < 2019 and totalaula > 40;
+
+select ano, totalaula, nome from cursos
+where ano < 2019 or totalaula > 40;
