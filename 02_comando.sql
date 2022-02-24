@@ -160,3 +160,49 @@ where ano < 2019 and totalaula > 40;
 
 select ano, totalaula, nome from cursos
 where ano < 2019 or totalaula > 40;
+
+-- pesquisa o p no inicio da palavra
+select * from cursos
+where nome like 'p%'; -- Operador 'like = parecido' '% = caractere coringa
+
+-- pesquisa o a no final da palavra
+select * from cursos
+where nome like '%a';
+
+-- pesquisa o a em qualquer lugar
+select * from cursos
+where nome like '%a%';
+
+-- pesquisa tudo que não tiver a
+select * from cursos
+where nome not like '%a%';
+
+-- pesquisa tudo que começa com p e termine n
+select * from cursos
+where nome like 'p%n';
+
+-- pesquisa tudo que começa com p e termine n e + caractere
+select * from cursos
+where nome like 'p%n_'; -- '_' sublinhado wild card
+
+-- traz apenas o resumo
+select descricao from cursos;
+select distinct descricao from cursos
+order by descricao;
+
+-- funçao de agregação
+select * from cursos order by totalaula;
+select count(*) from cursos;
+select count(*) from cursos where totalaula > 30;
+
+-- maior
+select max(carga) from cursos;
+
+-- min
+select min(carga) from cursos;
+
+-- soma
+select sum(carga) from cursos;
+
+-- média
+select avg(carga) from cursos;
