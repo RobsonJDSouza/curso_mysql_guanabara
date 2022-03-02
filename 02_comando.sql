@@ -206,3 +206,14 @@ select sum(carga) from cursos;
 
 -- média
 select avg(carga) from cursos;
+
+
+select nacionalidade, count(*) from familia -- contar a quantidade de vezes que aparece a informação na tabela
+group by nacionalidade
+order by nacionalidade;
+select * from familia where nacionalidade = 'brasil';
+
+
+select peso, count(*) from familia
+group by peso
+having peso >= '62.00';
