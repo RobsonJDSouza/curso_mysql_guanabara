@@ -70,7 +70,6 @@ rename to familia;
 
 describe familia;
 select * from pessoas;
-
 use consulta;
 
 
@@ -87,14 +86,14 @@ alter table cursos -- alter table - comando para manipular colunas
 add column idcurso int first;
 
 -- add a chave primária
-alter table (nome da tabela)
+alter table nome da tabela
 add primary key(nome da colula que será chave primária);
 
 -- apagar a tabela
-drop table if exists (nome da tabela);
+drop table if exists nome da tabela;
 
 -- mudar os registros - Update --> Comando para moficar a linha da tabela
-update (nome da tabela)
+update nome da tabela
 set nome = 'robson'
 where idcurso = 1;
 
