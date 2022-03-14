@@ -1,5 +1,14 @@
 -- Acessando o mysql pelo terminal do Linux
 	mysql -h localhost -u root -p
+-- Dump do banco de dados
+	server
+	data export
+	
+-- Autorizar Drop do Data Base
+	edit
+	preferences
+	SQL Editor
+	safe Updates(rejects Updates and Deletes with no restrictions)
 
 create database consulta -- cria um novo banco de dados
 	default character set utf8 -- padrão de acentuação 
@@ -216,3 +225,6 @@ select * from familia where nacionalidade = 'brasil';
 select peso, count(*) from familia
 group by peso
 having peso >= '62.00';
+
+-- foreign Key--
+ 

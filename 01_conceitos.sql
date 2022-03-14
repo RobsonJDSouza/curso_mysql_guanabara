@@ -75,10 +75,31 @@ Alerta no banco de dados.
 
 -- rigistro = Tuplas
 
+SQL Constraints (Restrições)
+    São regras aplicadas nas colunas de uma Tabela
+    São usadas para limitar os tipos de dados que são inseridos.
+    Podem ser especificadas no momento de ciração de tabela (Create) ou após a tabela ter sido criada (Alter)
+        Principais
+        * Not null
+        * unique
+        *Primary Key
+        *Foreign Key
+        *Default
 Entidade 
-Atributos 
-relacionamento
-Cardinalidade 
+Atributos - Função que mapeia um conjunto de entidades em um domínio. Ex Entidade pessoa tem (Id, nome, endereço, altura)
+Relacionamento - è o relacionamento feito entre entidades
+Cardinalidade  - define o grau de ralação entre entidades
     - n para n / muitos para muitos - Relacionamento vira 'n' Uma entidade - Depois é só fazer chave primária de 1 para n /
     - um para um - Entidade Dominante - A entidade dominante irá receber a chave estrangeira
     - um para muitos - Chave primaira de 1 joga para n
+
+InnoDB 
+    é um mecanismo de armazenamento para o MySQL. 
+    O MySQL 5.5, e versões posteriores, o utilizam por padrão. Ele fornece as funcionalidades padrões de 
+    transação complacentes com ACID, juntamente com o suporte a chave estrangeira (Integridade Referencial Declarativa).
+
+ACID  
+    atomicidade - toda tarefa é feita ou nada é conciderado
+    consistente - antes de execurtar uma tarefa o banco estava ok, depois de executar essa tarefa ele terá que está ok
+    isolamento - caso tenha uma tarefa sendo executado, caso execute outra tarefa, terá que ser feita isolada da outra. Sem interferência
+    durabilidade - dado salvo não pode ser alterado. Nao pode perder dados do nada
