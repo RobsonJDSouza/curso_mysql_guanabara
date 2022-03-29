@@ -53,7 +53,7 @@ insert into pessoas values
 alter table pessoas
 add column profissao varchar (10);
 
--- acrescentando coluna na tabela escolendo a posição 
+-- acrescentando coluna na tabela escolhendo a posição 
 alter table pessoas
 add column profissao varchar (10) after nome;
 
@@ -225,6 +225,13 @@ select * from familia where nacionalidade = 'brasil';
 select peso, count(*) from familia
 group by peso
 having peso >= '62.00';
+
+--mudar o nome da coluna da tabela no select
+select * from tbcliente;
+select nome as nome_pri from tbcliente;
+
+-- pesquisar data de nascimento
+select * from (Nome da tabela) where year(nome da coluna) = 1984
 
 -- foreign Key--
  
