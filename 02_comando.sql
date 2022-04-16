@@ -27,72 +27,67 @@ create table pessoas( -- criar tabela para banco de dados
 	primary key (id) -- coloca a chave primária para a tabela
 ) default charset = utf8;
 
+create table if not exists cursos(   -- if not exists - caso tiver uma tabela cursos o BD não deixará sobrescrever
+	nome varchar(30) not null unique,  -- not null obriga escrever no campo - Constranger unique/ terá um nome apenas no registro
+	descricao text,
+	carga int unsigned,  -- unsigned - não poderá ter sinais no registro
+	totalaula int unsigned,
+	ano year default '2022'
+) default charset = utf8;  -- charset - para não termos problema de acentuaçãoptimize
+
 show databases; -- mostrar todos bancos existentes
 show tables; -- mostrar todas tabelas exitentes no schema
-describe pessoas; -- mostras as infomações da tabela
-drop database consulta; -- excluir um banco/schema
+describe tabela; -- mostras as infomações da tabela
+drop database databases; -- excluir um banco/schema
 
 -- inserir dados do usuário
-insert into pessoas
+insert into nome_da_tabela
 	(id, nome, nascimento, sexo, peso, altura, nascionalidade) -- todos os campos da tabela
 values
 	(default, 'Robson', '1984-08-20', 'M', '84.0', '1.79', 'Brasil');
 
-select * from pessoas;
+select * from nome_da_tabela;
 
 -- inserir usuários quando todas as informções forem padrão
-insert into pessoas values
+insert into nome_da_tabela values
 	(default, 'Ana', '1982-10-24', 'F', '56.0', '1.62', 'Brasil');
 
 -- inserir varios usuários no banco
-insert into pessoas values
+insert into nome_da_tabela values
 	(default, 'Sofia Souza', '2016-03-21', 'F', '25.0', '1.20', 'Brasil'),
     (default, 'Iris Souza', '1961-08-17', 'F', '60.0', '1.57', 'Brasil');
 
 -- acrescentando coluna na tabela 
-alter table pessoas
-add column profissao varchar (10);
+alter table nome_da_tabela
+add column nome_da_coluna varchar (10);
 
 -- acrescentando coluna na tabela escolhendo a posição 
-alter table pessoas
-add column profissao varchar (10) after nome;
+alter table nome_da_tabela
+add column nome_da_coluna varchar (10) after nome;
 
 -- acrescentando coluna na tabela escolendo a primeira posião da tabela
-alter table pessoas
-add column codigo int first;
+alter table nome_da_tabela
+add column nome_da_coluna int first;
 
 -- excluir coluna da tabela
-alter table pessoas
-drop column profissao;
+alter table nome_da_tabela
+drop column nome_da_coluna;
 
 -- modificando as informações da coluna/campo da tabela
-alter table pessoas
-modify column profissao varchar(20) default '';
+alter table nome_da_tabela
+modify column nome_da_coluna varchar(20) default '';
 
 -- modificando no nome da coluna
-alter table pessoas
-change column nascionalidade nacionalidade varchar(15) default 'Brasil' not null;
+alter table nome_da_tabela
+change column nome_da_coluna nome_para_modificar varchar(15) default 'Brasil' not null;
 
 -- modificar o nome da tabela
-alter table pessoas
-rename to familia;
-
-describe familia;
-select * from pessoas;
-use consulta;
-
-
-create table if not exists cursos(   -- if not exists - caso tiver uma tabela cursos o BD não deixará sobrescrever
-nome varchar(30) not null unique,  -- not null obriga escrever no campo - Constranger unique/ terá um nome apenas no registro
-descricao text,
-carga int unsigned,  -- unsigned - não poderá ter sinais no registro
-totalaula int unsigned,
-ano year default '2022'
-) default charset = utf8;  -- charset - para não termos problema de acentuaçãoptimize
+alter table nome_da_tabela
+rename to nome_para_modificar;
 
 -- modificar a posição para primeiro
-alter table cursos -- alter table - comando para manipular colunas
-add column idcurso int first;
+alter table nome_da_tabela -- alter table - comando para manipular colunas
+add column nome_da_coluna int first;
 
 -- add a chave primária
 alter table nome da tabela
@@ -103,22 +98,22 @@ drop table if exists nome da tabela;
 
 -- mudar os registros - Update --> Comando para moficar a linha da tabela
 update nome da tabela
-set nome = 'robson'
-where idcurso = 1;
+set nome_da_coluna = 'robson'
+where nome_da_coluna = 1;
 
 -- mudar dois regitro ou mais - sempre na mesma lina
-update cursos
-set nome = 'Mysql' , descricao = 'YouTube'
-where idcurso = 1
+update nome_da_tabela
+set nome_da_coluna = 'Mysql' , nome_da_coluna = 'YouTube'
+where nome_da_coluna = 1
 limit = 1; -- limitar a alteração para apenas uma linha, tirando o risco de fazer mudança em outra linha
 
 --modificar mais de duas linhas
-update cursos
-	set nome = 'robson'
-	where coluna = 1
+update nome_da_tabela
+	set nome_da_coluna = 'robson'
+	where nome_da_tabela = 1
 
 -- remover linhas da tabela
-delete from cursos
+delete from nome_da_tabela
 where idcurso = '8'
 
 -- deletar mais de um linha
@@ -143,9 +138,12 @@ select idcurso, nome, ano from cursos -- posso colocar os campos invertidos
 order by nome, ano; -- qual coluna devo ordenar a consulta
 
 -- pesquisar o banco por linhas
-select * from cursos
-where idcurso = '1'
-order by nome;
+select * from nome_da_tabela
+where nome_da_tabela = '1'
+order by nome_da_tabela;
+
+
+
 
 select ano, idcurso from cursos
 where idcurso = '1'
