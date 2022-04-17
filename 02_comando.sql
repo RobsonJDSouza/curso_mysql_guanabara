@@ -167,34 +167,49 @@ where ano < 2019 and totalaula > 40;
 select ano, totalaula, nome from cursos
 where ano < 2019 or totalaula > 40;
 
--- pesquisa o p no inicio da palavra
-select * from cursos
-where nome like 'p%'; -- Operador 'like = parecido' '% = caractere coringa
+-- Pesquisa com Like / Operador 'like = parecido' / % = caractere coringa
+select * from nome_da_tabela where nome_da_coluna like'%nome_para_pesquisar%';
+
+-- pesquisa o p no inicio da palavr a
+select * from nome_da_tabela
+
+where nome_da_coluna like 'p%'; -- 
 
 -- pesquisa o a no final da palavra
-select * from cursos
+select * from nome_da_tabela
 where nome like '%a';
 
 -- pesquisa o a em qualquer lugar
-select * from cursos
+select * from nome_da_tabela
 where nome like '%a%';
 
 -- pesquisa tudo que não tiver a
-select * from cursos
+select * from nome_da_tabela
 where nome not like '%a%';
 
 -- pesquisa tudo que começa com p e termine n
-select * from cursos
+select * from nome_da_tabela
 where nome like 'p%n';
 
 -- pesquisa tudo que começa com p e termine n e + caractere
-select * from cursos
+select * from nome_da_tabela
 where nome like 'p%n_'; -- '_' sublinhado wild card
 
--- traz apenas o resumo
-select descricao from cursos;
-select distinct descricao from cursos
-order by descricao;
+-- Trocar o nome da coluna da tabela
+SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca';
+SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE NOT (nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca');
+
+-- Operadores Lógicos And e OR 
+SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca';
+SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE NOT (nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca');
+
+-- Distinct - traz apenas o resumo 
+select distinct nome_da_coluna from nome_da_tabela;
+select distinct nome_da_coluna, nome_da_coluna from nome_da_tabela where nome_da_coluna = 'informação da tabela';
+
+-- Limitar a quantidade de linhas da pesquisa - Limit
+select * from nome_da_tabela limit 5; -- limita até 5 linhas na pesquisa
+select * from nome_da_tabela limit 2,15; -- começa da linha 2 da pesquisa e vai até a linha 15
 
 -- funçao de agregação
 select * from cursos order by totalaula;
@@ -231,5 +246,7 @@ select nome as nome_pri from tbcliente;
 -- pesquisar data de nascimento
 select * from (Nome da tabela) where year(nome da coluna) = 1984
 
--- foreign Key--
- 
+
+
+-- Operador in - Irá trazer todas informação que cotem na pesquisa
+select * from nome_da_tabela where nome_da_coluna in ('informação_da_coluna', 'informação_da_coluna');
