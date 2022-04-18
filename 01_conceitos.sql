@@ -82,9 +82,9 @@ SQL Constraints (Restrições)
         Principais
         * Not null
         * unique
-        *Primary Key
-        *Foreign Key
-        *Default
+        * Primary Key
+        * Foreign Key
+        * Default
 Entidade 
 Atributos - Função que mapeia um conjunto de entidades em um domínio. Ex Entidade pessoa tem (Id, nome, endereço, altura)
 Relacionamento - è o relacionamento feito entre entidades
@@ -92,6 +92,9 @@ Cardinalidade  - define o grau de ralação entre entidades
     - n para n / muitos para muitos - Relacionamento vira 'n' Uma entidade - Depois é só fazer chave primária de 1 para n /
     - um para um - Entidade Dominante - A entidade dominante irá receber a chave estrangeira
     - um para muitos - Chave primaira de 1 joga para n
+
+HAVING - 
+HAVING é uma condição (filtro) que se aplica ao resultado de uma agregação
 
 InnoDB 
     é um mecanismo de armazenamento para o MySQL. 

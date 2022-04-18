@@ -111,7 +111,8 @@ truncate TABLE cursos
 -- Ordenar tabela order by					
 SELECT * FROM tabela_de_produtos order by preco_de_lista; -- orderna a TABLE pela colula - order by
 SELECT * FROM tabela_de_produtos order by preco_de_lista desc; -- orderna a TABLE pela coluna de baixo para cima
-SELECT * FROM tabela_de_produtos order by sabor, preco_de_lista; -- ordenar primeiro pela coluna sabor e depois preço
+SELECT * FROM tabela_de_produtos order by sabor, preco_de_lista; -- ordernar primeiro pela coluna sabor e depois preço
+SELECT * FROM tabela_de_produtos ORDER BY sabor ASC, preco_de_lista DESC; --ordernar a primeira coluna ascendente e a segunda descendente
 
 -- selecionar coluna
 SELECT idcurso, nome, ano FROM cursos -- posso colocar os campos invertidos
@@ -172,22 +173,27 @@ SELECT * FROM nome_da_tabela limit 5; -- limita até 5 linhas na pesquisa
 SELECT * FROM nome_da_tabela limit 2,15; -- começa da linha 2 da pesquisa e vai até a linha 15
 
 -- funçao de agregação
-SELECT * FROM cursos order by totalaula; SELECT count(*) FROM cursos; SELECT count(*) FROM cursos WHERE totalaula > 30;
-
+SELECT embalagem, MAX(preco_de_lista) AS maior_preco FROM tabela_de_produtos GROUP BY embalagem;
+SELECT embalagem, MIN(preco_de_lista) AS menor_preco FROM tabela_de_produtos GROUP BY embalagem;
+SELECT embalagem, SUM(preco_de_lista) AS soma_preco FROM tabela_de_produtos GROUP BY embalagem;
+SELECT embalagem, AVG(preco_de_lista) AS media_preco FROM tabela_de_produtos GROUP BY embalagem;
+SELECT embalagem, COUNT(preco_de_lista) AS contar_preco FROM tabela_de_produtos GROUP BY embalagem;
+SELECT ESTADO, BAIRRO, SUM(LIMITE_DE_CREDITO) AS LIMITE FROM tabela_de_clientes 
+WHERE CIDADE = 'Rio de Janeiro' 
+GROUP BY ESTADO, BAIRRO 
+ORDER BY BAIRRO;
 -- maior
 SELECT max(carga) FROM cursos;
-
 -- min
 SELECT min(carga) FROM cursos;
-
 -- soma
 SELECT sum(carga) FROM cursos;
-
 -- média
 SELECT avg(carga) FROM cursos;
 
 -- pesquisar data de nascimento
 SELECT * FROM (Nome da tabela) WHERE year(nome da coluna) = 1984
 
-
-
+-- Filtro HAVING
+SELECT ESTADO, SUM(LIMITE_DE_CREDITO) as SOMA_LIMITE FROM tabela_de_clientes GROUP BY ESTADO
+HAVING SUM(LIMITE_DE_CREDITO) > 900000;
