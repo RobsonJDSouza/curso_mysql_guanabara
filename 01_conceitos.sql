@@ -15,7 +15,6 @@
 -- Dump
     Backup do Banco de dados
     
-
 -- Tipos Primitivos
     https://elias.praciano.com/2014/01/mysql-tipos-de-dados/
 
