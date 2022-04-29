@@ -92,8 +92,7 @@ Cardinalidade  - define o grau de ralação entre entidades
     - um para um - Entidade Dominante - A entidade dominante irá receber a chave estrangeira
     - um para muitos - Chave primaira de 1 joga para n
 
-HAVING - 
-HAVING é uma condição (filtro) que se aplica ao resultado de uma agregação
+
 
 InnoDB 
     é um mecanismo de armazenamento para o MySQL. 
@@ -105,3 +104,18 @@ ACID
     consistente - antes de execurtar uma tarefa o banco estava ok, depois de executar essa tarefa ele terá que está ok
     isolamento - caso tenha uma tarefa sendo executado, caso execute outra tarefa, terá que ser feita isolada da outra. Sem interferência
     durabilidade - dado salvo não pode ser alterado. Nao pode perder dados do nada
+
+HAVING 
+    É uma condição (filtro) que se aplica ao resultado de uma agregação
+Cláusula usada para especificar condições de filtragem em grupos de registros ou agregaçẽs.
+É frequentimente usada com a cláusula GROUP BY para filtrar as colunas agrupadas
+Sintaxe:
+Select coluna, função_agregação() as (nome)
+From tabela
+where filtro
+group by colunas
+having filtro_agrupamento
+
+
+Case
+    Fazemos um teste em um ou mias campos e, dependendo do resultadom, teremos um ou outro valor

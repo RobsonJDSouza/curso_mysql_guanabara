@@ -200,3 +200,15 @@ SELECT * FROM (Nome da tabela) WHERE year(nome da coluna) = 1984
 -- Filtro HAVING
 SELECT ESTADO, SUM(LIMITE_DE_CREDITO) as SOMA_LIMITE FROM tabela_de_clientes GROUP BY ESTADO
 HAVING SUM(LIMITE_DE_CREDITO) > 900000;
+
+-- Aplicando "CASE and IF"
+select preco, if (preco < 6.000, "Preço Baixo", "Preço Alto") as Situacao
+From itens_notas_fiscais;
+
+select preco,
+case 
+	when preco <= 6.309 then 'Preço baixo'
+    when (preco > 6.309) and (preco <= 9.0105) then 'Preço Justo'
+    when preco > 9.0106 then 'Preço Cara'
+end as Situação
+from itens_notas_fiscais;
