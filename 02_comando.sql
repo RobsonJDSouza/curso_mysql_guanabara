@@ -12,7 +12,7 @@
 
 -- Criar um banco de dados
 CREATE database nome_do_banco;
-	DEFAULT character SET utf8 -- padrão de acentua ão 
+	DEFAULT character SET utf8 -- padrão de acentuaão 
     DEFAULT collate utf8_general_ci;
 
  -- acessar o banco
@@ -27,7 +27,7 @@ CREATE TABLE if not EXISTS nome_da_tabela( -- if not EXISTS - caso tiver uma tab
 	carga int unsigned,  -- unsigned - não poderá ter sinais no registro
 	peso decimal (5, 2),
 	altura decimal (3,2),
-	nascionalidade VARCHAR (30) DEFAULT 'Brasil', -- DEFAULT - caso não colocar a informação o BD irá colocar o padrão
+	nacionalidade VARCHAR (30) DEFAULT 'Brasil', -- DEFAULT - caso não colocar a informação o BD irá colocar o padrão
 	PRIMARY KEY (id) -- coloca a chave primária para a tabela
 ) DEFAULT charset = utf8; -- charset - para não termos problema de acentuaçãoptimize
 
@@ -55,11 +55,19 @@ INSERT INTO nome_da_tabela VALUES
 	(DEFAULT, 'Sofia Souza', '2016-03-21', 'F', '25.0', '1.20', 'Brasil'),
     (DEFAULT, 'Iris Souza', '1961-08-17', 'F', '60.0', '1.57', 'Brasil');
 
+-- add a chave primária
+ALTER TABLE nome da tabela ADD PRIMARY KEY(nome da colula que será chave primária);
+
+-- add chave estrangeira
+	-- preciso acrescentar à tabela a coluna que iremos trazer
+alter table carro add column fk_id_pessoa int;
+alter table carro add foreign key (fk_id_pessoa) references carro(id_carro);
+
 -- acrescentando coluna na tabela 
 ALTER TABLE nome_da_tabela ADD column nome_da_coluna VARCHAR (10);
 
 -- acrescentando coluna na tabela escolhendo a posição 
-ALTER TABLE nome_da_tabela ADD column nome_da_coluna VARCHAR (10) AFTER nome;
+ALTER TABLE nome_da_tabela ADD column nome_da_coluna VARCHAR (10) AFTER nome_da_coluna;
 
 -- acrescentando coluna na tabela escolendo a primeira posião da tabela
 ALTER TABLE nome_da_tabela ADD column nome_da_coluna INT FIRST;
