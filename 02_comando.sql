@@ -84,9 +84,6 @@ ALTER TABLE nome_da_tabela change column nome_da_coluna nome_para_modificar VARC
 -- modificar o nome da tabela
 ALTER TABLE nome_da_tabela rename TO nome_para_modificar;
 
--- ADD a chave primária
-ALTER TABLE nome da tabela ADD PRIMARY KEY(nome da colula que será chave primária);
-
 -- apagar a tabela
 DROP TABLE IF EXISTS nome da tabela;
 
@@ -98,7 +95,7 @@ UPDATE nome_da_tabela SET nome_da_coluna = 'Mysql' nome_da_coluna = 'YouTube' WH
 limit = 1; -- limitar a alteração para apenas uma linha, tirando o risco de fazer mudança em outra linha
 
 --modificar mais de duas linhas
-UPDATE nome_da_tabela SET nome_da_coluna = 'robson' WHERE nome_da_tabela = 1
+UPDATE nome_da_tabela SET nome_da_coluna = 'robson' WHERE nome_da_coluna = 1
 
  -- remover linhas da tabela
 DELETE FROM nome_da_tabela WHERE idcurso = '8'
