@@ -217,3 +217,6 @@ case
     when preco > 9.0106 then 'Preço Cara'
 end as Situação
 from itens_notas_fiscais;
+
+select seller_id, payday, reference, transaction_type, amount, auto_created, description from payments_api.transactions_transaction mbtt
+where reference IN ('IT001ORDOCY6YK0OG0LE1') and transaction_type = 'credit_transfer';
