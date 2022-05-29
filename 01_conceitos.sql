@@ -199,5 +199,6 @@ select c.nome from tabela_de_clientes as c
 inner join tabela_de_vendedores as v
 on c.nome = v.bairro;
 
-
+-- SUBCONSULTAS
+select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores);
 

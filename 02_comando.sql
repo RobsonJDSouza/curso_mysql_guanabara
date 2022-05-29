@@ -103,7 +103,7 @@ DELETE FROM nome_da_tabela WHERE idcurso = '8'
 -- deletar mais de um linha
 DELETE FROM cursos WHERE i curso = 2022 -- Se na tabela tiver mais de um usuário tiver no campo o ano 2022	
 
--- todas linhas de tabela
+-- deletar todas linhas de tabela
 truncate TABLE cursos	
 
 -- COMANDOS USANDO SELECT
@@ -133,9 +133,12 @@ SELECT nome_da_coluna, nome_da_coluna,nome_da_coluna FROM nome_da_tabela WHERE n
 
 -- operadores relacionais - =, <,>,<=,>=,!=,<> 
 SELECT nome_da_coluna FROM nome_da_tabela WHERE nome between 7 and 10;
-SELECT nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE totalaula in (35,36);
 SELECT nome_da_coluna, nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE ano < 2019 and totalaula > 40;
 SELECT nome_da_coluna, nome_da_coluna, nnome_da_coluna FROM cursos WHERE ano < 2019 or totalaula > 40;
+
+--OPERADOR IN - Irá trazer todas informação que contem na pesquisa
+SELECT * FROM nome_da_tabela WHERE nome_da_coluna IN ('informação_da_coluna', 'informação_da_coluna');
+SELECT nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE totalaula in (35,36);
 
 -- Pesquisa com Like / Operador 'LIKE = parecido' / % = caractere coringa
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE'%nome_para_pesquisar%';
@@ -154,9 +157,15 @@ SELECT * FROM nome_da_tabela WHERE nome_da_coluna not LIKE '%a%';
 
 -- pesquisa tudo que começa com p e termine n
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE 'p%n';
-
+1
 -- pesquisa tudo que começa com p e termine n e + caractere
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE 'p%n_'; -- '_' sublinhado wild card
+
+--REGEXP - PESQUISA
+select * from tabela_de_vendedores where nome regexp '[a]$';
+select * from tabela_de_vendedores where nome regexp '^[mc]';
+select * from tabela_de_vendedores where nome regexp '^[mc]|robs';
+select * from tabela_de_vendedores where nome regexp '^[^mc]'; --^dentro do cochetes vira negação
 
 -- Pesquisa informação de data
 select nome_da_coluna, nome_da_coluna from nome_da_tabela where year(nome_da_coluna) = 2016 ;
@@ -165,8 +174,7 @@ select nome_da_coluna, nome_da_coluna from nome_da_tabela where year(nome_da_col
 SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca';
 SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE NOT (nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca');
 
--- Operador in - Irá trazer todas informação que contem na pesquisa
-SELECT * FROM nome_da_tabela WHERE nome_da_coluna IN ('informação_da_coluna', 'informação_da_coluna');
+
 
 -- Operadores Lógicos And e OR 
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca';
@@ -181,30 +189,26 @@ SELECT * FROM nome_da_tabela limit 5; -- limita até 5 linhas na pesquisa
 SELECT * FROM nome_da_tabela limit 2,15; -- começa da linha 2 da pesquisa e vai até a linha 15
 
 -- funçao de agregação
+SELECT max(carga) FROM cursos;
+SELECT min(carga) FROM cursos;
+SELECT sum(carga) FROM cursos;
+SELECT avg(carga) FROM cursos;
 SELECT embalagem, MAX(preco_de_lista) AS maior_preco FROM tabela_de_produtos GROUP BY embalagem;
 SELECT embalagem, MIN(preco_de_lista) AS menor_preco FROM tabela_de_produtos GROUP BY embalagem;
 SELECT embalagem, SUM(preco_de_lista) AS soma_preco FROM tabela_de_produtos GROUP BY embalagem;
 SELECT embalagem, AVG(preco_de_lista) AS media_preco FROM tabela_de_produtos GROUP BY embalagem;
 SELECT embalagem, COUNT(preco_de_lista) AS contar_preco FROM tabela_de_produtos GROUP BY embalagem;
-SELECT ESTADO, BAIRRO, SUM(LIMITE_DE_CREDITO) AS LIMITE FROM tabela_de_clientes 
-WHERE CIDADE = 'Rio de Janeiro' 
-GROUP BY ESTADO, BAIRRO 
-ORDER BY BAIRRO;
--- maior
-SELECT max(carga) FROM cursos;
--- min
-SELECT min(carga) FROM cursos;
--- soma
-SELECT sum(carga) FROM cursos;
--- média
-SELECT avg(carga) FROM cursos;
 
--- pesquisar data de nascimento
+--GROUP BY
+SELECT ESTADO, BAIRRO, SUM(LIMITE_DE_CREDITO) AS LIMITE FROM tabela_de_clientes WHERE CIDADE = 'Rio de Janeiro'GROUP BY ESTADO, BAIRRO;
+select bairro, count(*) from tabela_de_vendedores group by bairro;
+
+--PESQUISAR POR DATA
 SELECT * FROM (Nome da tabela) WHERE year(nome da coluna) = 1984
 
--- Filtro HAVING
-SELECT ESTADO, SUM(LIMITE_DE_CREDITO) as SOMA_LIMITE FROM tabela_de_clientes GROUP BY ESTADO
-HAVING SUM(LIMITE_DE_CREDITO) > 900000;
+--HAVING
+select cidade, sum(idade) as total from tabela_de_clientes group by cidade having total < 170;
+select cidade, sum(idade) as total from tabela_de_clientes group by cidade having sum(idade) < 170;
 
 -- Aplicando "CASE and IF"
 select preco, if (preco < 6.000, "Preço Baixo", "Preço Alto") as Situacao
@@ -220,3 +224,15 @@ from itens_notas_fiscais;
 
 select seller_id, payday, reference, transaction_type, amount, auto_created, description from payments_api.transactions_transaction mbtt
 where reference IN ('IT001ORDOCY6YK0OG0LE1') and transaction_type = 'credit_transfer';
+
+
+--UNION
+select distinct bairro 'Vendendor' as tipo from tabela_de_vendedores union select distinct bairro 'Clientes' as tipo from tabela_de_clientes;
+select distinct bairro from tabela_de_vendedores union all select distinct bairro from tabela_de_clientes;
+
+
+--SUBCONSULTAS
+select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores);
+
+
+--VISÃO - View é uma tabela Lógica, resultado de uma consulta, que pode ser usada em qualquer outra consulta
