@@ -210,29 +210,34 @@ SELECT * FROM (Nome da tabela) WHERE year(nome da coluna) = 1984
 select cidade, sum(idade) as total from tabela_de_clientes group by cidade having total < 170;
 select cidade, sum(idade) as total from tabela_de_clientes group by cidade having sum(idade) < 170;
 
--- Aplicando "CASE and IF"
-select preco, if (preco < 6.000, "Preço Baixo", "Preço Alto") as Situacao
-From itens_notas_fiscais;
+--IF"
+select preco, if (preco < 6.000, "Preço Baixo", "Preço Alto") as Situacao From itens_notas_fiscais;
 
+--CASE
 select preco,
 case 
 	when preco <= 6.309 then 'Preço baixo'
     when (preco > 6.309) and (preco <= 9.0105) then 'Preço Justo'
     when preco > 9.0106 then 'Preço Cara'
-end as Situação
-from itens_notas_fiscais;
-
-select seller_id, payday, reference, transaction_type, amount, auto_created, description from payments_api.transactions_transaction mbtt
-where reference IN ('IT001ORDOCY6YK0OG0LE1') and transaction_type = 'credit_transfer';
-
+end as Situação from itens_notas_fiscais;
 
 --UNION
 select distinct bairro 'Vendendor' as tipo from tabela_de_vendedores union select distinct bairro 'Clientes' as tipo from tabela_de_clientes;
 select distinct bairro from tabela_de_vendedores union all select distinct bairro from tabela_de_clientes;
 
-
 --SUBCONSULTAS
 select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores);
 
-
 --VISÃO - View é uma tabela Lógica, resultado de uma consulta, que pode ser usada em qualquer outra consulta
+create view vw_clientes as select * from tabela_de_vendedores;
+select * from vw_clientes;
+DROP View vw_clientes;
+
+--CONCAT
+select concat ('Robson', 'José de souza') as 'Meu nome'
+select concat(nome,' ', bairro) as nome from tabela_de_vendedores;
+select concat('Robson',' ', bairro) as nome from tabela_de_vendedores where matricula = 00235;
+--IFNULL - Caso tivel um valor nulo.
+select concat('Robson',' ', ifnull(bairro, 0)) from tabela_de_vendedores where matricula = 00235;
+--COALESCE
+select concat('Robson',' ', coalesce(null,bairro,null, 0)) from tabela_de_vendedores where matricula = 00235;
