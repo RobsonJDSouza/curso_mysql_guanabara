@@ -1,22 +1,26 @@
+--Verificar os usuário
+select user from mysql.user;
+
 -- Acessando o mysql pelo terminal do Linux
-	mysql -h localhost -u root -p
+mysql -h localhost -u root -p
 -- Dump do banco de dados
-	server
-	data export
+server
+data export
 	
 -- Autorizar Drop do Data Base
-	edit
-	preferences
-	SQL Editor
-	safe Updates(rejects Updates and Deletes with no restrictions)
+edit
+preferences
+SQL Editor
+safe Updates(rejects Updates and Deletes with no restrictions)
 
 -- Criar um banco de dados
-CREATE database nome_do_banco;
-	DEFAULT character SET utf8 -- padrão de acentuaão 
-    DEFAULT collate utf8_general_ci;
+CREATE database nome_do_banco 
+DEFAULT character SET utf8 -- padrão de acentuaão 
+DEFAULT collate utf8_general_ci;
 
- -- acessar o banco
-USE nome_do_banco;
+--CONSULTA BANCO
+USE nome_do_banco
+SHOW databases; 
 
  -- criar tabela para banco de dados
 CREATE TABLE if not EXISTS nome_da_tabela( -- if not EXISTS - caso tiver uma tabela cursos o BD não deixará sobrescrever
@@ -31,12 +35,11 @@ CREATE TABLE if not EXISTS nome_da_tabela( -- if not EXISTS - caso tiver uma tab
 	PRIMARY KEY (id) -- coloca a chave primária para a tabela
 ) DEFAULT charset = utf8; -- charset - para não termos problema de acentuaçãoptimize
 
--- mostrar todos bancos existentes
-show databases; 
--- mostrar todas tabelas exitentes no schema
-show tables; 
--- mostras as infomações da tabela
-describe tabela; 
+show databases;
+show tables;
+use nome_do_banco;
+describe nome_da_tabela;
+
 -- excluir um banco/schema
 DROP database nome_do_banco;
 
@@ -136,11 +139,11 @@ SELECT nome_da_coluna FROM nome_da_tabela WHERE nome between 7 and 10;
 SELECT nome_da_coluna, nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE ano < 2019 and totalaula > 40;
 SELECT nome_da_coluna, nome_da_coluna, nnome_da_coluna FROM cursos WHERE ano < 2019 or totalaula > 40;
 
---OPERADOR IN - Irá trazer todas informação que contem na pesquisa
+--OPERADOR IN
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna IN ('informação_da_coluna', 'informação_da_coluna');
 SELECT nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE totalaula in (35,36);
 
--- Pesquisa com Like / Operador 'LIKE = parecido' / % = caractere coringa
+--OPERADOT LIKE = parecido / % = caractere coringa
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE'%nome_para_pesquisar%';
 
 -- pesquisa o p no inicio da palavra
@@ -167,28 +170,28 @@ select * from tabela_de_vendedores where nome regexp '^[mc]';
 select * from tabela_de_vendedores where nome regexp '^[mc]|robs';
 select * from tabela_de_vendedores where nome regexp '^[^mc]'; --^dentro do cochetes vira negação
 
--- Pesquisa informação de data
+--PESQUISA POR DATA
 select nome_da_coluna, nome_da_coluna from nome_da_tabela where year(nome_da_coluna) = 2016 ;
 
--- Trocar o nome da coluna da tabela quando pesquisamos - AS
+--AS - ALIAS 
 SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca';
 SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE NOT (nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca');
 
 
 
--- Operadores Lógicos And e OR 
+--AND e OR - Operadores Lógicos 
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca';
 SELECT * FROM nome_da_tabela WHERE NOT (nome_da_coluna = '00235' or nome_da_coluna = 'tijuca');
 
--- Distinct - traz apenas o resumo 
+--Distinct
 SELECT distinct nome_da_coluna FROM nome_da_tabela;
 SELECT distinct nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE nome_da_coluna = 'informação da tabela';
 
--- Limitar a quantidade de linhas da pesquisa - Limit
+--LIMIT
 SELECT * FROM nome_da_tabela limit 5; -- limita até 5 linhas na pesquisa
 SELECT * FROM nome_da_tabela limit 2,15; -- começa da linha 2 da pesquisa e vai até a linha 15
 
--- funçao de agregação
+--FUNÇÃO DE AGREGAÇÃO
 SELECT max(carga) FROM cursos;
 SELECT min(carga) FROM cursos;
 SELECT sum(carga) FROM cursos;
@@ -241,3 +244,14 @@ select concat('Robson',' ', bairro) as nome from tabela_de_vendedores where matr
 select concat('Robson',' ', ifnull(bairro, 0)) from tabela_de_vendedores where matricula = 00235;
 --COALESCE
 select concat('Robson',' ', coalesce(null,bairro,null, 0)) from tabela_de_vendedores where matricula = 00235;
+
+--OPERADOR ARITMÉTICOS
+select 3*9 as soma;
+select 3*9/3 as soma;
+select numero * 2 as total from notas_fiscais;
+select cpf, ceiling(numero * 2) as total from notas_fiscais;
+select cpf, floor(numero * 2) as total from notas_fiscais;
+
+--FUNÇÃO
+create	function soma (a int, b int) returns float deterministic return round ((a* b) ,2);
+select soma(3,4);
