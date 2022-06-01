@@ -200,5 +200,11 @@ inner join tabela_de_vendedores as v
 on c.nome = v.bairro;
 
 -- SUBCONSULTAS
-select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores);
+select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores)
 
+
+
+--FUNÇÓES
+Documentação 
+https://dev-mysql-com.translate.goog/doc/?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt-BR&_x_tr_pto=sc
+https://www.w3schools.com/sql/

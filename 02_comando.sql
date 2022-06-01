@@ -249,9 +249,16 @@ select concat('Robson',' ', coalesce(null,bairro,null, 0)) from tabela_de_vended
 select 3*9 as soma;
 select 3*9/3 as soma;
 select numero * 2 as total from notas_fiscais;
-select cpf, ceiling(numero * 2) as total from notas_fiscais;
+select datediff(current_timestamp(), '1984-08-20') as Dias_de_vida;
 select cpf, floor(numero * 2) as total from notas_fiscais;
 
 --FUNÇÃO
 create	function soma (a int, b int) returns float deterministic return round ((a* b) ,2);
 select soma(3,4);
+select ltrim('    robson jose') as retirar; -- string
+select adddate('2022-05-31', interval 10 day); -- date
+select datediff(current_timestamp(), '1984-08-20') as Dias_de_vida;
+select datediff(current_timestamp(), '1984-08-20') as Dias_de_vida;--ARITMÉTICOS
+
+--MANIPULAÇÃO DE DADOS
+SELECT concat('O dia de hoje é: ', date_format(current_timestamp(), '%m/%Y')) as resultado;
