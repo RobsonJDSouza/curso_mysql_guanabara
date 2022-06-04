@@ -1,5 +1,5 @@
 --Verificar os usuário
-select user from mysql.user;
+SELECT user FROM mysql.user;
 
 -- Acessando o mysql pelo terminal do Linux
 mysql -h localhost -u root -p
@@ -11,37 +11,44 @@ data export
 edit
 preferences
 SQL Editor
-safe Updates(rejects Updates and Deletes with no restrictions)
+SAFE Updates(rejects Updates AND Deletes WITH NO restrictions)
 
--- Criar um banco de dados
-CREATE database nome_do_banco 
-DEFAULT character SET utf8 -- padrão de acentuaão 
-DEFAULT collate utf8_general_ci;
+--DIAGRAMA
+DATABASE
+reverse engineer
+
+--DESABILITAR ATUALIZAÇÃO
+SET SQL_SAFE_UPDATES = 0;
+SET SQL_SAFE_UPDATES = 1; 
+
+EXPLAINr um banco de dados
+CREATE DATABASE nome_do_banco 
+DROPULT character SET utf8 -- padrão de acentuaão 
+DEFAULT COLLATE utf8_general_ci;
 
 --CONSULTA BANCO
 USE nome_do_banco
-SHOW databases; 
+SHOW DATABASEs; 
 
- -- criar tabela para banco de dados
-CREATE TABLE if not EXISTS nome_da_tabela( -- if not EXISTS - caso tiver uma tabela cursos o BD não deixará sobrescrever
-	id int not null auto_increment, -- não precisa dar a informação. O BD irá colocar automáticamente
-	nome VARCHAR (30) not null unique, -- not null obriga escrever no campo - Constranger unique/ terá um nome apenas no registro
+EXPLAINar tabela para banco de dados
+CREATE TABLE IF NOT EXISTS nome_da_tabela( -- if not EXISTS - caso tiver uma tabela cursos o BD não deixará sobrescrevDROPid INT not null auto_increment, -- não precisa dar a informação. O BD irá colocar automáticamente
+	nome VARCHAR (30) NOT NULL UNIQUE, -- not null obriga escrever no campo - Constranger unique/ terá um nome apenas no registro
 	nascimento date,
 	sexo enum ('F', 'M'),
-	carga int unsigned,  -- unsigned - não poderá ter sinais no registro
-	peso decimal (5, 2),
-	altura decimal (3,2),
+	carga INT unsigned,  -- unsigned - não poderá ter sinais no registro
+	peso DECIMAL (5, 2),
+	altura DECIMAL (3,2),
 	nacionalidade VARCHAR (30) DEFAULT 'Brasil', -- DEFAULT - caso não colocar a informação o BD irá colocar o padrão
 	PRIMARY KEY (id) -- coloca a chave primária para a tabela
 ) DEFAULT charset = utf8; -- charset - para não termos problema de acentuaçãoptimize
 
-show databases;
-show tables;
-use nome_do_banco;
+SHOW DATABASEs;
+SHOW tables;
+USE nome_do_banco;
 describe nome_da_tabela;
 
 -- excluir um banco/schema
-DROP database nome_do_banco;
+DROP DATABASE nome_do_banco;
 
 -- inserir dados do usuário
 INSERT INTO nome_da_tabela
@@ -49,7 +56,7 @@ INSERT INTO nome_da_tabela
 VALUES
 	(DEFAULT, 'Robson', '1984-08-20', 'M', '84.0', '1.79', 'Brasil');
 
--- inserir usuários quando todas as informções forem padrão
+-- inserir usuários quando todas AS informções forem padrão
 INSERT INTO nome_da_tabela VALUES
 	(DEFAULT, 'Ana', '1982-10-24', 'F', '56.0', '1.62', 'Brasil');
 
@@ -63,8 +70,8 @@ ALTER TABLE nome da tabela ADD PRIMARY KEY(nome da colula que será chave primá
 
 -- add chave estrangeira
 	-- preciso acrescentar à tabela a coluna que iremos trazer
-alter table carro add column fk_id_pessoa int;
-alter table carro add foreign key (fk_id_pessoa) references carro(id_carro);
+ALTER table carro ADD column fk_id_pessoa INT;
+ALTER table carro ADD FOREIGN KEY (fk_id_pessoa) REFERENCES carro(id_carro);
 
 -- acrescentando coluna na tabela 
 ALTER TABLE nome_da_tabela ADD column nome_da_coluna VARCHAR (10);
@@ -78,7 +85,7 @@ ALTER TABLE nome_da_tabela ADD column nome_da_coluna INT FIRST;
 -- excluir coluna da tabela
 ALTER TABLE nome_da_tabela DROP column nome_da_coluna;
 
--- modificando as informações da coluna/campo da tabela
+-- modificando AS informações da coluna/campo da tabela
 ALTER TABLE nome_da_tabela MODIFY column nome_da_coluna VARCHAR(20) DEFAULT '';
 
 -- modificando no nome da coluna
@@ -93,12 +100,10 @@ DROP TABLE IF EXISTS nome da tabela;
 -- mudar os registros - Update --> Comando para moficar a linha da tabela
 UPDATE nome da tabela SET nome_da_coluna = 'robson' WHERE nome_da_coluna = 1;
 
- -- mudar dois regitro ou mais - sempre na mesma lina
+--UPDATE
 UPDATE nome_da_tabela SET nome_da_coluna = 'Mysql' nome_da_coluna = 'YouTube' WHERE nome_da_coluna = 1
-limit = 1; -- limitar a alteração para apenas uma linha, tirando o risco de fazer mudança em outra linha
-
---modificar mais de duas linhas
 UPDATE nome_da_tabela SET nome_da_coluna = 'robson' WHERE nome_da_coluna = 1
+UPDATE tabela_de_produtos SET preco_de_lista = preco_de_lista = 0 WHERE sabor = 'melância';
 
  -- remover linhas da tabela
 DELETE FROM nome_da_tabela WHERE idcurso = '8'
@@ -114,14 +119,14 @@ truncate TABLE cursos
 -- Selecionar do tabela
 SELECT * FROM nome_da_tabela;
 
--- Orderna a TABLE pela colula - order by				
-SELECT * FROM tabela_de_produtos order by preco_de_lista; 
+-- Orderna a TABLE pela colula - ORDER BY				
+SELECT * FROM tabela_de_produtos ORDER BY preco_de_lista; 
 
 -- Orderna a TABLE pela coluna de baixo para cima
-SELECT * FROM tabela_de_produtos order by preco_de_lista desc; 
+SELECT * FROM tabela_de_produtos ORDER BY preco_de_lista desc; 
 
 -- ordernar primeiro pela coluna sabor e depois preço
-SELECT * FROM tabela_de_produtos order by sabor, preco_de_lista; 
+SELECT * FROM tabela_de_produtos ORDER BY sabor, preco_de_lista; 
 
 --ordernar a primeira coluna ascendente e a segunda descendente
 SELECT * FROM tabela_de_produtos ORDER BY sabor ASC, preco_de_lista DESC; 
@@ -135,13 +140,13 @@ SELECT nome_da_coluna, nome_da_coluna FROM nome_da_tabelas WHERE nome_da_coluna 
 SELECT nome_da_coluna, nome_da_coluna,nome_da_coluna FROM nome_da_tabela WHERE nome_da_coluna > '1'
 
 -- operadores relacionais - =, <,>,<=,>=,!=,<> 
-SELECT nome_da_coluna FROM nome_da_tabela WHERE nome between 7 and 10;
-SELECT nome_da_coluna, nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE ano < 2019 and totalaula > 40;
+SELECT nome_da_coluna FROM nome_da_tabela WHERE nome BETWEEN 7 AND 10;
+SELECT nome_da_coluna, nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE ano < 2019 AND totalaula > 40;
 SELECT nome_da_coluna, nome_da_coluna, nnome_da_coluna FROM cursos WHERE ano < 2019 or totalaula > 40;
 
 --OPERADOR IN
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna IN ('informação_da_coluna', 'informação_da_coluna');
-SELECT nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE totalaula in (35,36);
+SELECT nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE totalaula IN (35,36);
 
 --OPERADOT LIKE = parecido / % = caractere coringa
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE'%nome_para_pesquisar%';
@@ -156,7 +161,7 @@ SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE '%a';
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE '%a%';
 
 -- pesquisa tudo que não tiver a
-SELECT * FROM nome_da_tabela WHERE nome_da_coluna not LIKE '%a%';
+SELECT * FROM nome_da_tabela WHERE nome_da_coluna NOT LIKE '%a%';
 
 -- pesquisa tudo que começa com p e termine n
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE 'p%n';
@@ -164,14 +169,20 @@ SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE 'p%n';
 -- pesquisa tudo que começa com p e termine n e + caractere
 SELECT * FROM nome_da_tabela WHERE nome_da_coluna LIKE 'p%n_'; -- '_' sublinhado wild card
 
+--INDEX
+SHOW INDEX FROM tabela_de_produtos;
+EXPLAIN SELECT * FROM tabela_de_produtos WHERE nome_do_produto = 'springer';
+CREATE INDEX idx_tabela_de_produtos ON tabela_de_produtos (nome_do_produto);
+DROP INDEX idx_tabela_de_produtos ON tabela_de_produtos;
+
 --REGEXP - PESQUISA
-select * from tabela_de_vendedores where nome regexp '[a]$';
-select * from tabela_de_vendedores where nome regexp '^[mc]';
-select * from tabela_de_vendedores where nome regexp '^[mc]|robs';
-select * from tabela_de_vendedores where nome regexp '^[^mc]'; --^dentro do cochetes vira negação
+SELECT * FROM tabela_de_vendedores WHERE nome regexp '[a]$';
+SELECT * FROM tabela_de_vendedores WHERE nome regexp '^[mc]';
+SELECT * FROM tabela_de_vendedores WHERE nome regexp '^[mc]|robs';
+SELECT * FROM tabela_de_vendedores WHERE nome regexp '^[^mc]'; --^dentro do cochetes vira negação
 
 --PESQUISA POR DATA
-select nome_da_coluna, nome_da_coluna from nome_da_tabela where year(nome_da_coluna) = 2016 ;
+SELECT nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE year(nome_da_coluna) = 2016 ;
 
 --AS - ALIAS 
 SELECT nome_da_coluna AS apelido, matricula AS ID FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna = 'tijuca';
@@ -184,12 +195,12 @@ SELECT * FROM nome_da_tabela WHERE nome_da_coluna = '00235' AND nome_da_coluna =
 SELECT * FROM nome_da_tabela WHERE NOT (nome_da_coluna = '00235' or nome_da_coluna = 'tijuca');
 
 --Distinct
-SELECT distinct nome_da_coluna FROM nome_da_tabela;
-SELECT distinct nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE nome_da_coluna = 'informação da tabela';
+SELECT DISTINCT nome_da_coluna FROM nome_da_tabela;
+SELECT DISTINCT nome_da_coluna, nome_da_coluna FROM nome_da_tabela WHERE nome_da_coluna = 'informação da tabela';
 
 --LIMIT
-SELECT * FROM nome_da_tabela limit 5; -- limita até 5 linhas na pesquisa
-SELECT * FROM nome_da_tabela limit 2,15; -- começa da linha 2 da pesquisa e vai até a linha 15
+SELECT * FROM nome_da_tabela LIMIT 5; -- limita até 5 linhas na pesquisa
+SELECT * FROM nome_da_tabela LIMIT 2,15; -- começa da linha 2 da pesquisa e vai até a linha 15
 
 --FUNÇÃO DE AGREGAÇÃO
 SELECT max(carga) FROM cursos;
@@ -204,61 +215,61 @@ SELECT embalagem, COUNT(preco_de_lista) AS contar_preco FROM tabela_de_produtos 
 
 --GROUP BY
 SELECT ESTADO, BAIRRO, SUM(LIMITE_DE_CREDITO) AS LIMITE FROM tabela_de_clientes WHERE CIDADE = 'Rio de Janeiro'GROUP BY ESTADO, BAIRRO;
-select bairro, count(*) from tabela_de_vendedores group by bairro;
+SELECT bairro, count(*) FROM tabela_de_vendedores GROUP BY bairro;
 
 --PESQUISAR POR DATA
 SELECT * FROM (Nome da tabela) WHERE year(nome da coluna) = 1984
 
 --HAVING
-select cidade, sum(idade) as total from tabela_de_clientes group by cidade having total < 170;
-select cidade, sum(idade) as total from tabela_de_clientes group by cidade having sum(idade) < 170;
+SELECT cidade, sum(idade) AS total FROM tabela_de_clientes GROUP BY cidade HAVING total < 170;
+SELECT cidade, sum(idade) AS total FROM tabela_de_clientes GROUP BY cidade HAVING sum(idade) < 170;
 
 --IF"
-select preco, if (preco < 6.000, "Preço Baixo", "Preço Alto") as Situacao From itens_notas_fiscais;
+SELECT preco, IF (preco < 6.000, "Preço Baixo", "Preço Alto") AS Situacao FROM itens_notas_fiscais;
 
 --CASE
-select preco,
-case 
-	when preco <= 6.309 then 'Preço baixo'
-    when (preco > 6.309) and (preco <= 9.0105) then 'Preço Justo'
-    when preco > 9.0106 then 'Preço Cara'
-end as Situação from itens_notas_fiscais;
+SELECT preco,
+CASE 
+	WHEN preco <= 6.309 THEN 'Preço baixo'
+    WHEN (preco > 6.309) AND (preco <= 9.0105) THEN 'Preço Justo'
+    WHEN preco > 9.0106 THEN 'Preço Cara'
+END AS Situação FROM itens_notas_fiscais;
 
 --UNION
-select distinct bairro 'Vendendor' as tipo from tabela_de_vendedores union select distinct bairro 'Clientes' as tipo from tabela_de_clientes;
-select distinct bairro from tabela_de_vendedores union all select distinct bairro from tabela_de_clientes;
+SELECT DISTINCT bairro 'Vendendor' AS tipo FROM tabela_de_vendedores UNION SELECT DISTINCT bairro 'Clientes' AS tipo FROM tabela_de_clientes;
+SELECT DISTINCT bairro FROM tabela_de_vendedores UNION ALL SELECT DISTINCT bairro FROM tabela_de_clientes;
 
 --SUBCONSULTAS
-select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores);
+SELECT * FROM tabela_de_clientes WHERE bairro IN (SELECT DISTINCT bairro FROM tabela_de_vendedores);
 
---VISÃO - View é uma tabela Lógica, resultado de uma consulta, que pode ser usada em qualquer outra consulta
-create view vw_clientes as select * from tabela_de_vendedores;
-select * from vw_clientes;
+EXPLAIN - View é uma tabela Lógica, resultado de uma consulta, que pode ser usada em qualquer outra consulta
+CREATE view vw_clientes AS SELECT * FROM tabela_de_vendedores;
+DROPCT * FROM vw_clientes;
 DROP View vw_clientes;
 
 --CONCAT
-select concat ('Robson', 'José de souza') as 'Meu nome'
-select concat(nome,' ', bairro) as nome from tabela_de_vendedores;
-select concat('Robson',' ', bairro) as nome from tabela_de_vendedores where matricula = 00235;
+SELECT concat ('Robson', 'José de souza') AS 'Meu nome'
+SELECT concat(nome,' ', bairro) AS nome FROM tabela_de_vendedores;
+SELECT concat('Robson',' ', bairro) AS nome FROM tabela_de_vendedores WHERE matricula = 00235;
 --IFNULL - Caso tivel um valor nulo.
-select concat('Robson',' ', ifnull(bairro, 0)) from tabela_de_vendedores where matricula = 00235;
+SELECT concat('Robson',' ', ifnull(bairro, 0)) FROM tabela_de_vendedores WHERE matricula = 00235;
 --COALESCE
-select concat('Robson',' ', coalesce(null,bairro,null, 0)) from tabela_de_vendedores where matricula = 00235;
+SELECT concat('Robson',' ', coalesce(null,bairro,null, 0)) FROM tabela_de_vendedores WHERE matricula = 00235;
 
 --OPERADOR ARITMÉTICOS
-select 3*9 as soma;
-select 3*9/3 as soma;
-select numero * 2 as total from notas_fiscais;
-select datediff(current_timestamp(), '1984-08-20') as Dias_de_vida;
-select cpf, floor(numero * 2) as total from notas_fiscais;
+SELECT 3*9 AS soma;
+SELECT 3*9/3 AS soma;
+SELECT numero * 2 AS total FROM notas_fiscais;
+SELECT datediff(current_timestamp(), '1984-08-20') AS Dias_de_vida;
+SELECT cpf, floor(numero * 2) AS total FROM notas_fiscais;
 
---FUNÇÃO
-create	function soma (a int, b int) returns float deterministic return round ((a* b) ,2);
-select soma(3,4);
-select ltrim('    robson jose') as retirar; -- string
-select adddate('2022-05-31', interval 10 day); -- date
-select datediff(current_timestamp(), '1984-08-20') as Dias_de_vida;
-select datediff(current_timestamp(), '1984-08-20') as Dias_de_vida;--ARITMÉTICOS
+EXPLAINO
+CREATE	function soma (a INT, b INT) returns float deterministic return round ((a* b) ,2);
+DROPCT soma(3,4);
+SELECT ltrim('    robson jose') AS retirar; -- string
+SELECT adddate('2022-05-31', interval 10 day); -- date
+SELECT datediff(current_timestamp(), '1984-08-20') AS Dias_de_vida;
+SELECT datediff(current_timestamp(), '1984-08-20') AS Dias_de_vida;--ARITMÉTICOS
 
 --MANIPULAÇÃO DE DADOS
-SELECT concat('O dia de hoje é: ', date_format(current_timestamp(), '%m/%Y')) as resultado;
+SELECT concat('O dia de hoje é: ', date_format(current_timestamp(), '%m/%Y')) AS resultado;
